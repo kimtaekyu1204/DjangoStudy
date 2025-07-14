@@ -1,0 +1,15 @@
+FROM python:3.11.9-bookworm
+
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# pip용 requirements.txt 복사 및 설치
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 전체 소스 복사
+COPY . /app/
+
+# 장고 서버 실행 (포트는 docker-compose에서 열어줌)
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
