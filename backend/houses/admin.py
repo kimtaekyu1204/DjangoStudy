@@ -17,4 +17,5 @@ class HouseAdmin(admin.ModelAdmin):
         "pet_allowed"
     )
     search_fields = ("address",)
-    fields = ("name", "address", ("price", "pet_allowed"),)
+    # 요소를 하나의 form으로 병합 
+    fields = (("name","owner"), "address", ("price", "pet_allowed"))
