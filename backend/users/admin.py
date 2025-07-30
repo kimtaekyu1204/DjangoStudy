@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
         (
             "Profile", # 필드 제목 
             { # 이 그룹에 포함시킬 필드 목록을 튜플로 나열
-                "fields" : ("username", "password", "name", "email", "is_host"), "classes":("wide"),
+                "fields" : ("avatar","username", "password", "name", "email", "is_host", "gender", "language","currency"), "classes":("wide"),
             },
         ),
         (

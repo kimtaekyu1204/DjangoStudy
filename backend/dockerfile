@@ -1,12 +1,20 @@
 FROM python:3.13-bookworm
 
+# Poetry 설치
+ENV POETRY_VERSION=1.8.2
+RUN pip install "poetry==$POETRY_VERSION"
+
+
+# Poetry 가상환경 비활성화 (Docker에서는 시스템에 설치)
+ENV POETRY_VIRTUALENVS_CREATE=false
 
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# pip용 requirements.txt 복사 및 설치
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+
+# pyproject.toml 먼저 복사해서 의존성 설치
+COPY pyproject.toml poetry.lock* /app/
+RUN poetry install --no-interaction --no-ansi
 
 # 전체 소스 복사
 COPY . /app/
